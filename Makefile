@@ -9,8 +9,8 @@ DISASSEMBLEOBJS=disassembler.o printRoutines.o
 
 disassembler: $(DISASSEMBLEOBJS)
 
-disassembler.o: disassembler.c printRoutines.h
-printRoutines.o: printRoutines.c printRoutines.h
+disassembler.o: disassembler.c y86.h printRoutines.h
+printRoutines.o: printRoutines.c y86.h printRoutines.h
 
 clean:
 	-rm -rf *.o disassembler

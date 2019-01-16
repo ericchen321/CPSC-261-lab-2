@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
+#include "y86.h"
 #include "printRoutines.h"
 
 /*

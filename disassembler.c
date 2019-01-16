@@ -8,6 +8,7 @@
 #include <errno.h>
 #include <string.h>
 
+#include "y86.h"
 #include "printRoutines.h"
 
 #define ERROR_RETURN -1
@@ -56,7 +57,7 @@ int main(int argc, char **argv) {
 
   // Your code starts here.
   while(fread(&currByte,1,1,machineCode)){
-    printf("lol\n");
+    
   }
   
   fclose(machineCode);
