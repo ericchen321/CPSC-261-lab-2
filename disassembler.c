@@ -16,6 +16,7 @@
 int main(int argc, char **argv) {
   
   FILE *machineCode, *outputFile;
+  uint8_t currByte;
 
   // Verify that the command line has an appropriate number
   // of arguments
@@ -54,6 +55,9 @@ int main(int argc, char **argv) {
   printInstruction(outputFile);
 
   // Your code starts here.
+  while(fread(&currByte,1,1,machineCode)){
+    printf("lol\n");
+  }
   
   fclose(machineCode);
   fclose(outputFile);
