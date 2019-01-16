@@ -18,6 +18,7 @@ int main(int argc, char **argv) {
   
   FILE *machineCode, *outputFile;
   uint8_t currByte;
+  uint64_t pc = 0;
 
   // Verify that the command line has an appropriate number
   // of arguments
@@ -52,13 +53,26 @@ int main(int argc, char **argv) {
 
   // Comment or delete the following lines and this comment before
   // handing in your final version.
-  printPosition(outputFile, 0x1234);
-  printInstruction(outputFile);
+  // printPosition(outputFile, 0x1234);
+  // printInstruction(outputFile);
 
   // Your code starts here.
-  while(fread(&currByte,1,1,machineCode)){
-    
+
+  // Searches for first byte from start of file, print .pos if not at 0x00
+  // FIXME: consider empty machinecode
+  fread(&currByte,1,1,machineCode);
+  while(currByte == 0x00){
+    fread(&currByte,1,1,machineCode);
+    pc+=1;
   }
+  if (pc != 0){
+    printPosition(outputFile, (unsigned long)pc);
+  }
+
+  do{
+
+  }
+  while(fread(&currByte,1,1,machineCode));
   
   fclose(machineCode);
   fclose(outputFile);
