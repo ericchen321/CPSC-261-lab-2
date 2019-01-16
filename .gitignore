@@ -4,3 +4,4 @@ disassembler
 *.mem
 *.ys
 A1TestFiles/
+A1OutFiles/
