@@ -9,6 +9,7 @@
 #include <string.h>
 
 #include "y86.h"
+#include "instructionDecode.h"
 #include "printRoutines.h"
 
 #define ERROR_RETURN -1
@@ -18,6 +19,9 @@ int main(int argc, char **argv) {
   
   FILE *machineCode, *outputFile;
   uint8_t currByte;
+  uint8_t opCode;
+  uint8_t regA, regB;
+  uint64_t C;
   uint64_t pc = 0;
 
   // Verify that the command line has an appropriate number
@@ -58,19 +62,28 @@ int main(int argc, char **argv) {
 
   // Your code starts here.
 
-  // Searches for first byte from start of file, print .pos if not at 0x00
-  // FIXME: consider empty machinecode
-  fread(&currByte,1,1,machineCode);
-  while(currByte == 0x00){
-    fread(&currByte,1,1,machineCode);
+  // Searches for first non-zero byte from start of file,
+  // quit if end of file encountered or got a non-zero byte
+  while(fread(&currByte,1,1,machineCode) && currByte == 0x00){
     pc+=1;
   }
-  if (pc != 0){
+
+  if (pc == 0 && currByte == 0x00){ // file contains single zero byte 
+    // FIXME: print .byte 0x00
+    return SUCCESS;
+  }
+  else if (pc >= 2 && currByte == 0x00){ // file contains only and at least 2 bytes with 0
+    printPosition(outputFile, (unsigned long)(pc-1));
+    // FIXME: print .byte 0x00
+    return SUCCESS;
+  }
+  else{
     printPosition(outputFile, (unsigned long)pc);
   }
 
   do{
-
+    instructionDecode(&currByte, &opCode, &regA, &regB, &C, &pc, machineCode);
+    printLine(outputFile, &opCode, &regA, &regB, &C, &pc);
   }
   while(fread(&currByte,1,1,machineCode));
   

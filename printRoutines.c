@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <stdint.h>
 #include "y86.h"
 #include "printRoutines.h"
 
@@ -56,4 +57,37 @@ int printInstruction(FILE *out) {
 
   return res;
 }  
+
+// requires: no input pointers should be NULL
+// effects: prints instruction/word to given file
+void printLine(FILE* outFile, uint8_t* opCode, uint8_t* regA, uint8_t* regB, uint64_t* C, uint64_t* pc){
+  if(*opCode == HALT){
+    // FIXME
+    fprintf(outFile, "halt instr\n");
+  }
+  else if(*opCode == RRMOVQ){
+    fprintf(outFile, "rrmovq\n");
+  }
+  else if(*opCode == IRMOVQ){
+    fprintf(outFile, "irmovq\n");
+  }
+  else if(*opCode == 0xCC){
+    fprintf(outFile, "a quad word\n");
+  }
+  else if(*opCode == 0xDD){
+    fprintf(outFile, "a byte word\n");
+  }
+  else if((*opCode >> 4) == 0x07 && (*opCode & 0x0F) != 7){
+    fprintf(outFile, "some kind of jump\n");
+  }
+  else if(*opCode == 0xA0){
+    fprintf(outFile, "pushq\n");
+  }
+  else if(*opCode == 0xB0){
+    fprintf(outFile, "popq\n");
+  }
+  else{
+    fprintf(outFile, "\n");
+  }
+}
   

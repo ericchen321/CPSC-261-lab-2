@@ -18,6 +18,10 @@
 #define MOD_FLAG 0x6
 
 // op code definitions
+#define CMOV_BASE 0x20
+#define JMPXX_BASE 0x70
+#define OP_BASE 0x60
+
 #define HALT 0x00
 #define NOP 0x10
 #define RRMOVQ 0x20
@@ -28,14 +32,12 @@
 #define RET 0x90
 #define PUSHQ 0xA0
 #define POPQ 0xB0
-#define CMOV_BASE 0x20
 #define CMOVLE (CMOV_BASE + LE)
 #define CMOVL (CMOV_BASE + L)
 #define CMOVE (CMOV_BASE + E)
 #define CMOVNE (CMOV_BASE + NE)
 #define CMOVGE (CMOV_BASE + GE)
 #define CMOVG (CMOV_BASE + G)
-#define JMPXX_BASE 0x70
 #define JMP (JMPXX_BASE + NO_CON)
 #define JLE (JMPXX_BASE + LE)
 #define JL (JMPXX_BASE + L)
@@ -43,7 +45,6 @@
 #define JNE (JMPXX_BASE + NE)
 #define JGE (JMPXX_BASE + GE)
 #define JG (JMPXX_BASE + G)
-#define OP_BASE 0x60
 #define ADDQ (OP_BASE + ADD_FLAG)
 #define SUBQ (OP_BASE + SUB_FLAG)
 #define ANDQ (OP_BASE + AND_FLAG)
