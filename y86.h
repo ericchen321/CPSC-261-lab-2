@@ -53,5 +53,8 @@
 #define DIVQ (OP_BASE + DIV_FLAG)
 #define MODQ (OP_BASE + MOD_FLAG)
 
+// custom op-code definitions
+#define QUAD_WORD 0xCC
+#define BYTE_WORD 0xDD
 
 #endif

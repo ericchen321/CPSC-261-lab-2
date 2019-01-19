@@ -23,6 +23,9 @@ int main(int argc, char **argv) {
   uint8_t regA, regB;
   uint64_t C;
   uint64_t pc = 0;
+  uint64_t pc_not_updated;  // pass un-updated offset to print
+  _Bool halt_flag = 0;  // set high after a HALT instruction is printed; set low when the flag is high
+                    // AND a non-HALT instruction encountered
 
   // Verify that the command line has an appropriate number
   // of arguments
@@ -77,13 +80,17 @@ int main(int argc, char **argv) {
     // FIXME: print .byte 0x00
     return SUCCESS;
   }
-  else{
+  else if (currByte != 0x00 && pc != 0){ // first non-zero byte not the first byte
     printPosition(outputFile, (unsigned long)pc);
+  }
+  else if (currByte !=0x00 && pc == 0){ // first byte is non-zero
+    // does not print pos
   }
 
   do{
+    pc_not_updated = pc; 
     instructionDecode(&currByte, &opCode, &regA, &regB, &C, &pc, machineCode);
-    printLine(outputFile, &opCode, &regA, &regB, &C, &pc);
+    printLine(outputFile, &opCode, &regA, &regB, &C, &pc_not_updated, &halt_flag);
   }
   while(fread(&currByte,1,1,machineCode));
   

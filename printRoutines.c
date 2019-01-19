@@ -58,36 +58,81 @@ int printInstruction(FILE *out) {
   return res;
 }  
 
-// requires: no input pointers should be NULL
+// requires: no input pointers should be NULL;
+//           value of pc's reference is offset of given instruction/word
 // effects: prints instruction/word to given file
-void printLine(FILE* outFile, uint8_t* opCode, uint8_t* regA, uint8_t* regB, uint64_t* C, uint64_t* pc){
+void printLine(FILE* outFile, uint8_t* opCode, uint8_t* regA, uint8_t* regB, uint64_t* C, uint64_t* pc, _Bool* halt_flag){  
   if(*opCode == HALT){
-    // FIXME
-    fprintf(outFile, "halt instr\n");
+    if (!(*halt_flag)){
+      fprintf(outFile, "halt instr\n");
+      *halt_flag = 1;
+    }
   }
-  else if(*opCode == RRMOVQ){
-    fprintf(outFile, "rrmovq\n");
-  }
-  else if(*opCode == IRMOVQ){
-    fprintf(outFile, "irmovq\n");
-  }
-  else if(*opCode == 0xCC){
-    fprintf(outFile, "a quad word\n");
-  }
-  else if(*opCode == 0xDD){
-    fprintf(outFile, "a byte word\n");
-  }
-  else if((*opCode >> 4) == 0x07 && (*opCode & 0x0F) != 7){
-    fprintf(outFile, "some kind of jump\n");
-  }
-  else if(*opCode == 0xA0){
-    fprintf(outFile, "pushq\n");
-  }
-  else if(*opCode == 0xB0){
-    fprintf(outFile, "popq\n");
-  }
-  else{
-    fprintf(outFile, "\n");
+  else {
+    if(*halt_flag){
+      printPosition(outFile, (unsigned long)*pc);
+      *halt_flag = 0;
+    }
+    
+    if(*opCode == NOP){
+      fprintf(outFile, "nop\n");
+    }
+
+    else if(*opCode == RRMOVQ){
+      fprintf(outFile, "rrmovq\n");
+    }
+
+    else if(*opCode == IRMOVQ){
+      fprintf(outFile, "irmovq\n");
+    }
+
+    else if(*opCode == RMMOVQ){
+      fprintf(outFile, "rmmovq\n");
+    }
+
+    else if(*opCode == MRMOVQ){
+      fprintf(outFile, "mrmovq\n");
+    }
+
+    else if(*opCode == CALL){
+      fprintf(outFile, "call\n");
+    }
+
+    else if(*opCode == RET){
+      fprintf(outFile, "ret\n");
+    }
+
+    else if(*opCode == PUSHQ){
+      fprintf(outFile, "pushq\n");
+    }
+
+    else if(*opCode == POPQ){
+      fprintf(outFile, "popq\n");
+    }
+
+    else if ((*opCode >> 4) == 0x02 && (*opCode & 0x0F) != 7){
+      fprintf(outFile, "some kind of comov\n");
+    }
+
+    else if((*opCode >> 4) == 0x07 && (*opCode & 0x0F) != 7){
+      fprintf(outFile, "some kind of jump\n");
+    }
+
+    else if ((*opCode >> 4) == 0x06 && (*opCode & 0x0F) != 7){
+      fprintf(outFile, "some kind of arith op\n");
+    }
+
+    else if(*opCode == QUAD_WORD){
+      fprintf(outFile, "a quad word: %lx\n", *C);
+    }
+
+    else if(*opCode == BYTE_WORD){
+      fprintf(outFile, "a byte word\n");
+    }
+
+    else{
+      fprintf(outFile, "\n");
+    }
   }
 }
   
