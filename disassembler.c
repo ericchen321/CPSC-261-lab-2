@@ -72,12 +72,12 @@ int main(int argc, char **argv) {
   }
 
   if (pc == 0 && currByte == 0x00){ // file contains single zero byte 
-    // FIXME: print .byte 0x00
+    fprintf(outputFile, ".byte 0x0\n");
     return SUCCESS;
   }
   else if (pc >= 2 && currByte == 0x00){ // file contains only and at least 2 bytes with 0
     printPosition(outputFile, (unsigned long)(pc-1));
-    // FIXME: print .byte 0x00
+    fprintf(outputFile, ".byte 0x0\n");
     return SUCCESS;
   }
   else if (currByte != 0x00 && pc != 0){ // first non-zero byte not the first byte
@@ -89,6 +89,7 @@ int main(int argc, char **argv) {
 
   do{
     pc_not_updated = pc; 
+    instructionIdentify(&currByte, &opCode, &pc, machineCode);
     instructionDecode(&currByte, &opCode, &regA, &regB, &C, &pc, machineCode);
     printLine(outputFile, &opCode, &regA, &regB, &C, &pc_not_updated, &halt_flag);
   }
