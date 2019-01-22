@@ -5,4 +5,4 @@ disassembler
 *.ys
 A1TestFiles/
 A1OutFiles/
-file_auto_gen.sh
+*.sh
