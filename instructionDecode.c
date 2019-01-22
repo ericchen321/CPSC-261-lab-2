@@ -163,7 +163,6 @@ void fill_ra_rb(uint8_t* currByte, uint8_t* regA, uint8_t* regB){
  *          increment file pointer's cursor;
  *          increment pc to the next instruction;
  *          preserves opCode.
- *          
  */
 void instructionDecode(uint8_t* currByte, uint8_t* opCode, uint8_t* regA, uint8_t* regB, uint64_t* C, uint64_t* pc, FILE* inputFile){
   if (*opCode == HALT){

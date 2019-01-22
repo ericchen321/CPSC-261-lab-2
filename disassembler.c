@@ -65,8 +65,8 @@ int main(int argc, char **argv) {
 
   // Comment or delete the following lines and this comment before
   // handing in your final version.
-  // printPosition(outputFile, 0x1234);
-  // printInstruction(outputFile);
+  //printPosition(outputFile, 0x1234);
+  //printInstruction(outputFile);
 
   // Your code starts here.
 
@@ -78,12 +78,12 @@ int main(int argc, char **argv) {
   }
 
   if (pc == 1 && currByte == 0x00){ // file contains single zero byte 
-    fprintf(outputFile, ".byte 0x0\n");
+    fprintf(outputFile, "    .byte 0x0\n");
     return SUCCESS;
   }
   else if (pc >= 2 && currByte == 0x00){ // file contains only and at least 2 bytes with 0
     printPosition(outputFile, (unsigned long)(pc-1));
-    fprintf(outputFile, ".byte 0x0\n");
+    fprintf(outputFile, "    .byte 0x0\n");
     return SUCCESS;
   }
   else if (currByte != 0x00 && pc != 0){ // first non-zero byte not the first byte
@@ -92,7 +92,7 @@ int main(int argc, char **argv) {
   else if (currByte !=0x00 && pc == 0){ // first byte is non-zero
     // does not print pos
   }
-
+  
   do{
     pc_not_updated = pc; 
     instructionIdentify(&currByte, &opCode, &pc, machineCode);
@@ -103,9 +103,9 @@ int main(int argc, char **argv) {
 
   if(zero_count >= 1){
     printPosition(outputFile, (unsigned long)pc_not_updated);
-    fprintf(outputFile, ".byte 0x0\n");
+    fprintf(outputFile, "    .byte 0x0\n");
   }
-  
+    
   fclose(machineCode);
   fclose(outputFile);
   return SUCCESS;
