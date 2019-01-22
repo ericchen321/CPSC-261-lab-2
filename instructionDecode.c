@@ -161,11 +161,12 @@ void fill_ra_rb(uint8_t* currByte, uint8_t* regA, uint8_t* regB){
 
 /* effects: based on the given opCode, regA, regB, value C to given pointers;
  *          increment file pointer's cursor;
- *          increment pc to the next instruction.
+ *          increment pc to the next instruction;
+ *          preserves opCode.
+ *          
  */
 void instructionDecode(uint8_t* currByte, uint8_t* opCode, uint8_t* regA, uint8_t* regB, uint64_t* C, uint64_t* pc, FILE* inputFile){
   if (*opCode == HALT){
-    // FIXME: also consider quad word = 0 cases, and a bunch of other cases
     *pc+=1;
   }
     

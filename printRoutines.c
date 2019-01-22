@@ -61,17 +61,22 @@ int printInstruction(FILE *out) {
 // requires: no input pointers should be NULL;
 //           value of pc's reference is offset of given instruction/word
 // effects: prints instruction/word to given file
-void printLine(FILE* outFile, uint8_t* opCode, uint8_t* regA, uint8_t* regB, uint64_t* C, uint64_t* pc, _Bool* halt_flag){  
+void printLine(FILE* outFile, uint8_t* opCode, uint8_t* regA, uint8_t* regB, uint64_t* C, uint64_t* pc, uint64_t* zero_count, _Bool* halt_flag){  
   if(*opCode == HALT){
     if (!(*halt_flag)){
       fprintf(outFile, "halt instr\n");
       *halt_flag = 1;
     }
+    else{
+      *zero_count += 1;
+    }
   }
   else {
     if(*halt_flag){
+      fprintf(outFile, "\n");
       printPosition(outFile, (unsigned long)*pc);
       *halt_flag = 0;
+      *zero_count = 0;
     }
     
     if(*opCode == NOP){

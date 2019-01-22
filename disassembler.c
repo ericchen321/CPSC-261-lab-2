@@ -24,8 +24,13 @@ int main(int argc, char **argv) {
   uint64_t C;
   uint64_t pc = 0;
   uint64_t pc_not_updated;  // pass un-updated offset to print
-  _Bool halt_flag = 0;  // set high after a HALT instruction is printed; set low when the flag is high
-                    // AND a non-HALT instruction encountered
+  _Bool halt_flag = 0;      // set high after a HALT instruction is printed; set low when the flag is high
+                            // AND a non-HALT instruction encountered
+  uint64_t zero_count = 0;  // this counts the number of zero-bytes starting from the 1st halt instruction,
+                            // so after the 1st halt ins this becomes 1, and add by 1 everytime a new HALT is
+                            // read and halt_flag is high. Set to 0 after a non-halt instruction is encountered 
+                            // again. Meant to be read after entire machine code is read. 
+                            // If >= 1 then print the last zero-byte's position and .byte 0x0.
 
   // Verify that the command line has an appropriate number
   // of arguments
@@ -65,13 +70,14 @@ int main(int argc, char **argv) {
 
   // Your code starts here.
 
+  // assuming file contains at least one byte
   // Searches for first non-zero byte from start of file,
   // quit if end of file encountered or got a non-zero byte
   while(fread(&currByte,1,1,machineCode) && currByte == 0x00){
     pc+=1;
   }
 
-  if (pc == 0 && currByte == 0x00){ // file contains single zero byte 
+  if (pc == 1 && currByte == 0x00){ // file contains single zero byte 
     fprintf(outputFile, ".byte 0x0\n");
     return SUCCESS;
   }
@@ -91,9 +97,14 @@ int main(int argc, char **argv) {
     pc_not_updated = pc; 
     instructionIdentify(&currByte, &opCode, &pc, machineCode);
     instructionDecode(&currByte, &opCode, &regA, &regB, &C, &pc, machineCode);
-    printLine(outputFile, &opCode, &regA, &regB, &C, &pc_not_updated, &halt_flag);
+    printLine(outputFile, &opCode, &regA, &regB, &C, &pc_not_updated, &zero_count, &halt_flag);
   }
   while(fread(&currByte,1,1,machineCode));
+
+  if(zero_count >= 1){
+    printPosition(outputFile, (unsigned long)pc_not_updated);
+    fprintf(outputFile, ".byte 0x0\n");
+  }
   
   fclose(machineCode);
   fclose(outputFile);
