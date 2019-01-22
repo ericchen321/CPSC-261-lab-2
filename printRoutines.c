@@ -191,7 +191,7 @@ char* cond_opCode_to_str(uint8_t* opCode){
         return "subq";
       
       case ANDQ:
-        return "addq";
+        return "andq";
 
       case XORQ:
         return "xorq";
@@ -254,11 +254,11 @@ void printLine(FILE* outFile, uint8_t* opCode, uint8_t* regA, uint8_t* regB, uin
     }
 
     else if(*opCode == MRMOVQ){
-      fprintf(outFile, "    %-8s$0x%lx(%s), %s\n", "mrmovq", (unsigned long)(*C), reg_num_to_str(regB), reg_num_to_str(regA));
+      fprintf(outFile, "    %-8s0x%lx(%s), %s\n", "mrmovq", (unsigned long)(*C), reg_num_to_str(regB), reg_num_to_str(regA));
     }
 
     else if(*opCode == CALL){
-      fprintf(outFile, "    %-8s$0x%lx\n", "call", (unsigned long)(*C));
+      fprintf(outFile, "    %-8s0x%lx\n", "call", (unsigned long)(*C));
     }
 
     else if(*opCode == RET){
