@@ -1,5 +1,5 @@
-    irmovq  $0x100, %rsp
-    irmovq  $0xabcd, %rax
-    pushq   %rax
-    popq    %rsp
-    halt
+    irmovq  $0x100, %rsp        #30F4100
+    irmovq  $0xabcd, %rax        #30F0ABCD
+    pushq   %rax        #A00F
+    popq    %rsp        #B04F
+    halt        #0

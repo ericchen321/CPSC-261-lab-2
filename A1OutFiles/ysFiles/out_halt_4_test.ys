@@ -1,7 +1,7 @@
     .quad 0xabc
     .quad 0xbeef
-    rrmovq  %rax, %rax
-    halt
+    rrmovq  %rax, %rax        #2000
+    halt        #0
 
 .pos 0x13
     .byte 0xdd

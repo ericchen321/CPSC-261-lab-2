@@ -215,20 +215,68 @@ char* cond_opCode_to_str(uint8_t* opCode){
   }
 }
 
+/* requires: no input pointers should be NULL
+ * effects: prints the hex value of the instruction with given opCode, reg
+ *          values, etc, preceded by "        #" to outFile.
+ */
+void printLineHex(FILE* outFile, uint8_t* opCode, uint8_t* regA, uint8_t* regB, uint64_t* C, uint64_t* zero_count, _Bool* halt_flag){
+  if (*opCode == HALT && *zero_count >= 1){
+    // do nothing
+  }
+  
+  else if (*opCode == BYTE_WORD || *opCode == QUAD_WORD){
+    // do nothing
+  }
+
+  else {
+    fprintf(outFile, "        #");
+    if (*opCode == HALT || *opCode == NOP || *opCode == RET){
+      fprintf(outFile, "%X", *opCode);
+    }
+
+    else if((*opCode >> 4) == 0x02 || (*opCode >> 4) == 0x06){
+      fprintf(outFile, "%X%X%X", *opCode, *regA, *regB);
+    }
+
+    else if(*opCode == IRMOVQ){
+      fprintf(outFile, "%XF%X%lX", *opCode, *regB, (unsigned long)(*C));
+    }
+
+    else if(*opCode == RMMOVQ || *opCode == MRMOVQ){
+      fprintf(outFile, "%X%X%X%lX", *opCode, *regA, *regB, (unsigned long)(*C));
+    }
+
+    else if((*opCode >> 4) == 0x07 || (*opCode >> 4) == 0x08){
+      fprintf(outFile, "%X%lX", *opCode, (unsigned long)(*C));
+    }
+
+    else if(*opCode == PUSHQ || *opCode == POPQ){
+      fprintf(outFile, "%X%XF", *opCode, *regA);
+    }
+
+    else {
+      fprintf(outFile, "this means something messed up");
+    }
+  }
+}
+
 /* requires: no input pointers should be NULL;
  *           value of pc's reference is offset of given instruction/word
- * effects: prints instruction/word to given file
+ * effects: prints instruction/word to given file;
+ *          also print the hex value of the instruction on the same line
  */
 void printLine(FILE* outFile, uint8_t* opCode, uint8_t* regA, uint8_t* regB, uint64_t* C, uint64_t* pc, uint64_t* zero_count, _Bool* halt_flag){
   if(*opCode == HALT){
     if (!(*halt_flag)){
-      fprintf(outFile, "    halt\n");
+      fprintf(outFile, "    halt");
       *halt_flag = 1;
     }
     else{
       *zero_count += 1;
+      return;
     }
   }
+
   else {
     if(*halt_flag){
       fprintf(outFile, "\n");
@@ -238,64 +286,66 @@ void printLine(FILE* outFile, uint8_t* opCode, uint8_t* regA, uint8_t* regB, uin
     }
     
     if(*opCode == NOP){
-      fprintf(outFile, "    nop\n");
+      fprintf(outFile, "    nop");
     }
 
     else if(*opCode == RRMOVQ){
-      fprintf(outFile, "    %-8s%s, %s\n", "rrmovq", reg_num_to_str(regA), reg_num_to_str(regB));
+      fprintf(outFile, "    %-8s%s, %s", "rrmovq", reg_num_to_str(regA), reg_num_to_str(regB));
     }
 
     else if(*opCode == IRMOVQ){
-      fprintf(outFile, "    %-8s$0x%lx, %s\n", "irmovq", (unsigned long)(*C), reg_num_to_str(regB));
+      fprintf(outFile, "    %-8s$0x%lx, %s", "irmovq", (unsigned long)(*C), reg_num_to_str(regB));
     }
 
     else if(*opCode == RMMOVQ){
-      fprintf(outFile, "    %-8s%s, 0x%lx(%s)\n", "rmmovq", reg_num_to_str(regA), (unsigned long)(*C), reg_num_to_str(regB));
+      fprintf(outFile, "    %-8s%s, 0x%lx(%s)", "rmmovq", reg_num_to_str(regA), (unsigned long)(*C), reg_num_to_str(regB));
     }
 
     else if(*opCode == MRMOVQ){
-      fprintf(outFile, "    %-8s0x%lx(%s), %s\n", "mrmovq", (unsigned long)(*C), reg_num_to_str(regB), reg_num_to_str(regA));
+      fprintf(outFile, "    %-8s0x%lx(%s), %s", "mrmovq", (unsigned long)(*C), reg_num_to_str(regB), reg_num_to_str(regA));
     }
 
     else if(*opCode == CALL){
-      fprintf(outFile, "    %-8s0x%lx\n", "call", (unsigned long)(*C));
+      fprintf(outFile, "    %-8s0x%lx", "call", (unsigned long)(*C));
     }
 
     else if(*opCode == RET){
-      fprintf(outFile, "    ret\n");
+      fprintf(outFile, "    ret");
     }
 
     else if(*opCode == PUSHQ){
-      fprintf(outFile, "    %-8s%s\n", "pushq", reg_num_to_str(regA));
+      fprintf(outFile, "    %-8s%s", "pushq", reg_num_to_str(regA));
     }
 
     else if(*opCode == POPQ){
-      fprintf(outFile, "    %-8s%s\n", "popq", reg_num_to_str(regA));
+      fprintf(outFile, "    %-8s%s", "popq", reg_num_to_str(regA));
     }
 
     else if ((*opCode >> 4) == 0x02 && (*opCode & 0x0F) != 7){ // cmov
-      fprintf(outFile, "    %-8s%s, %s\n", cond_opCode_to_str(opCode), reg_num_to_str(regA), reg_num_to_str(regB));
+      fprintf(outFile, "    %-8s%s, %s", cond_opCode_to_str(opCode), reg_num_to_str(regA), reg_num_to_str(regB));
     }
 
     else if((*opCode >> 4) == 0x07 && (*opCode & 0x0F) != 7){ // jumps
-      fprintf(outFile, "    %-8s0x%lx\n", cond_opCode_to_str(opCode), (unsigned long)(*C));
+      fprintf(outFile, "    %-8s0x%lx", cond_opCode_to_str(opCode), (unsigned long)(*C));
     }
 
     else if ((*opCode >> 4) == 0x06 && (*opCode & 0x0F) != 7){ // arith ops
-      fprintf(outFile, "    %-8s%s, %s\n", cond_opCode_to_str(opCode), reg_num_to_str(regA), reg_num_to_str(regB));
+      fprintf(outFile, "    %-8s%s, %s", cond_opCode_to_str(opCode), reg_num_to_str(regA), reg_num_to_str(regB));
     }
 
     else if(*opCode == QUAD_WORD){
-      fprintf(outFile, "    .quad 0x%lx\n", (unsigned long)(*C));
+      fprintf(outFile, "    .quad 0x%lx", (unsigned long)(*C));
     }
 
     else if(*opCode == BYTE_WORD){
-      fprintf(outFile, "    .byte 0x%lx\n", (unsigned long)(*C));
+      fprintf(outFile, "    .byte 0x%lx", (unsigned long)(*C));
     }
 
     else{
-      fprintf(outFile, "THIS SHOULD NEVER APPEAR!!!\n");
+      fprintf(outFile, "THIS SHOULD NEVER APPEAR!!!");
     }
   }
+  printLineHex(outFile, opCode, regA, regB, C, zero_count, halt_flag);
+  fprintf(outFile, "\n");
 }
   

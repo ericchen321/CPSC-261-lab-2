@@ -1,41 +1,41 @@
 .pos 0x100
-    irmovq  $0x1008, %rax
-    mrmovq  0x0(%rax), %rax
-    irmovq  $0x1000, %rcx
-    mrmovq  0x0(%rcx), %rcx
-    irmovq  $0x1, %rdi
-    subq    %rdi, %rax
-    jl      0x1c3
-    mrmovq  0x0(%rcx), %rbx
-    rrmovq  %rax, %rdx
-    rrmovq  %rcx, %rsi
-    irmovq  $0x8, %rdi
-    addq    %rdi, %rsi
-    irmovq  $0x1, %rdi
-    subq    %rdi, %rdx
-    jl      0x1ae
-    mrmovq  0x0(%rsi), %rdi
-    rrmovq  %rdi, %rbp
-    subq    %rbx, %rbp
-    jge     0x199
-    rmmovq  %rbx, 0x0(%rsi)
-    rmmovq  %rdi, 0x0(%rcx)
-    rrmovq  %rdi, %rbx
-    irmovq  $0x8, %rdi
-    addq    %rdi, %rsi
-    jmp     0x157
-    irmovq  $0x8, %rdi
-    addq    %rdi, %rcx
-    jmp     0x128
-    halt
+    irmovq  $0x1008, %rax        #30F01008
+    mrmovq  0x0(%rax), %rax        #50000
+    irmovq  $0x1000, %rcx        #30F11000
+    mrmovq  0x0(%rcx), %rcx        #50110
+    irmovq  $0x1, %rdi        #30F71
+    subq    %rdi, %rax        #6170
+    jl      0x1c3        #721C3
+    mrmovq  0x0(%rcx), %rbx        #50310
+    rrmovq  %rax, %rdx        #2002
+    rrmovq  %rcx, %rsi        #2016
+    irmovq  $0x8, %rdi        #30F78
+    addq    %rdi, %rsi        #6076
+    irmovq  $0x1, %rdi        #30F71
+    subq    %rdi, %rdx        #6172
+    jl      0x1ae        #721AE
+    mrmovq  0x0(%rsi), %rdi        #50760
+    rrmovq  %rdi, %rbp        #2075
+    subq    %rbx, %rbp        #6135
+    jge     0x199        #75199
+    rmmovq  %rbx, 0x0(%rsi)        #40360
+    rmmovq  %rdi, 0x0(%rcx)        #40710
+    rrmovq  %rdi, %rbx        #2073
+    irmovq  $0x8, %rdi        #30F78
+    addq    %rdi, %rsi        #6076
+    jmp     0x157        #70157
+    irmovq  $0x8, %rdi        #30F78
+    addq    %rdi, %rcx        #6071
+    jmp     0x128        #70128
+    halt        #0
 
 .pos 0x1001
-    rrmovq  %rax, %rax
-    halt
+    rrmovq  %rax, %rax        #2000
+    halt        #0
 
 .pos 0x1008
     .quad 0xa
-    halt
+    halt        #0
 
 .pos 0x2000
     .quad 0x7

@@ -1,45 +1,45 @@
-    irmovq  $0x200, %rsp
-    call    0x14
-    halt
+    irmovq  $0x200, %rsp        #30F4200
+    call    0x14        #8014
+    halt        #0
 
 .pos 0x14
-    irmovq  $0x80, %rdi
-    irmovq  $0x4, %rsi
-    call    0x32
-    ret
-    irmovq  $0x8, %r8
-    irmovq  $0x1, %r9
-    xorq    %rax, %rax
-    andq    %rsi, %rsi
-    jmp     0x72
-    mrmovq  0x0(%rdi), %r10
-    xorq    %r11, %r11
-    subq    %r10, %r11
-    jle     0x6c
-    rrmovq  %r11, %r10
-    addq    %r10, %rax
-    addq    %r8, %rdi
-    subq    %r9, %rsi
-    jne     0x53
-    ret
-    halt
+    irmovq  $0x80, %rdi        #30F780
+    irmovq  $0x4, %rsi        #30F64
+    call    0x32        #8032
+    ret        #90
+    irmovq  $0x8, %r8        #30F88
+    irmovq  $0x1, %r9        #30F91
+    xorq    %rax, %rax        #6300
+    andq    %rsi, %rsi        #6266
+    jmp     0x72        #7072
+    mrmovq  0x0(%rdi), %r10        #50A70
+    xorq    %r11, %r11        #63BB
+    subq    %r10, %r11        #61AB
+    jle     0x6c        #716C
+    rrmovq  %r11, %r10        #20BA
+    addq    %r10, %rax        #60A0
+    addq    %r8, %rdi        #6087
+    subq    %r9, %rsi        #6196
+    jne     0x53        #7453
+    ret        #90
+    halt        #0
 
 .pos 0x80
     .quad 0xd000d000d
     .quad 0xffffff3fff3fff40
-    halt
+    halt        #0
 
 .pos 0x91
     .byte 0xb
-    halt
+    halt        #0
 
 .pos 0x93
     .byte 0xb
-    halt
+    halt        #0
 
 .pos 0x95
     .byte 0xb
-    halt
+    halt        #0
 
 .pos 0x99
     .byte 0x60

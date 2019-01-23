@@ -1,5 +1,5 @@
     .quad 0xabc
-    halt
+    halt        #0
 
 .pos 0x9
     .byte 0xdd

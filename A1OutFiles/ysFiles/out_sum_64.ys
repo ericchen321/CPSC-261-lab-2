@@ -1,15 +1,15 @@
 .pos 0x100
-    irmovq  $0x140, %rdx
-    xorq    %rax, %rax
-    mrmovq  0x0(%rdx), %rbx
-    addq    %rbx, %rax
-    irmovq  $0x8, %rbx
-    addq    %rbx, %rdx
-    irmovq  $0x170, %rbx
-    subq    %rdx, %rbx
-    jne     0x10c
-    ret
-    halt
+    irmovq  $0x140, %rdx        #30F2140
+    xorq    %rax, %rax        #6300
+    mrmovq  0x0(%rdx), %rbx        #50320
+    addq    %rbx, %rax        #6030
+    irmovq  $0x8, %rbx        #30F38
+    addq    %rbx, %rdx        #6032
+    irmovq  $0x170, %rbx        #30F3170
+    subq    %rdx, %rbx        #6123
+    jne     0x10c        #7410C
+    ret        #90
+    halt        #0
 
 .pos 0x140
     .quad 0x123456789abc
@@ -18,6 +18,6 @@
     .quad 0x2468a
     .quad 0xba
     .quad 0x10101010f0f0f0f0
-    halt
+    halt        #0
 .pos 0x177
     .byte 0x0

@@ -1,145 +1,145 @@
     .quad 0xa
     .quad 0x7789
-    halt
+    halt        #0
 
 .pos 0x100
-    rrmovq  %rax, %rax
-    rrmovq  %rax, %rcx
-    rrmovq  %rax, %rdx
-    rrmovq  %rax, %rbx
-    rrmovq  %rax, %rsi
-    rrmovq  %rax, %rdi
-    rrmovq  %rax, %rsp
-    rrmovq  %rax, %rbp
-    rrmovq  %rcx, %rsi
-    rrmovq  %rdx, %rsi
-    rrmovq  %rbx, %rsi
-    rrmovq  %rsi, %rsi
-    rrmovq  %rdi, %rsi
-    rrmovq  %rsp, %rsi
-    rrmovq  %rbp, %rsi
-    irmovq  $0xdeadbeef, %rax
-    irmovq  $0xdeadbeef, %rcx
-    irmovq  $0xdeadbeef, %rdx
-    irmovq  $0xdeadbeef, %rbx
-    irmovq  $0xdeadbeef, %rsi
-    irmovq  $0xdeadbeef, %rdi
-    irmovq  $0xdeadbeef, %rsp
-    irmovq  $0xdeadbeef, %rbp
-    halt
+    rrmovq  %rax, %rax        #2000
+    rrmovq  %rax, %rcx        #2001
+    rrmovq  %rax, %rdx        #2002
+    rrmovq  %rax, %rbx        #2003
+    rrmovq  %rax, %rsi        #2006
+    rrmovq  %rax, %rdi        #2007
+    rrmovq  %rax, %rsp        #2004
+    rrmovq  %rax, %rbp        #2005
+    rrmovq  %rcx, %rsi        #2016
+    rrmovq  %rdx, %rsi        #2026
+    rrmovq  %rbx, %rsi        #2036
+    rrmovq  %rsi, %rsi        #2066
+    rrmovq  %rdi, %rsi        #2076
+    rrmovq  %rsp, %rsi        #2046
+    rrmovq  %rbp, %rsi        #2056
+    irmovq  $0xdeadbeef, %rax        #30F0DEADBEEF
+    irmovq  $0xdeadbeef, %rcx        #30F1DEADBEEF
+    irmovq  $0xdeadbeef, %rdx        #30F2DEADBEEF
+    irmovq  $0xdeadbeef, %rbx        #30F3DEADBEEF
+    irmovq  $0xdeadbeef, %rsi        #30F6DEADBEEF
+    irmovq  $0xdeadbeef, %rdi        #30F7DEADBEEF
+    irmovq  $0xdeadbeef, %rsp        #30F4DEADBEEF
+    irmovq  $0xdeadbeef, %rbp        #30F5DEADBEEF
+    halt        #0
 
 .pos 0x500
-    rmmovq  %rax, 0xbeefdeadfeed(%rax)
-    rmmovq  %rax, 0xbeefdead(%rcx)
-    rmmovq  %rax, 0xbeefdead(%rdx)
-    rmmovq  %rax, 0xbeefdeadfeed(%rbx)
-    rmmovq  %rax, 0xbeefdead(%rsi)
-    rmmovq  %rax, 0xbeefdead(%rdi)
-    rmmovq  %rax, 0xbeefdeadfeed(%rsp)
-    rmmovq  %rax, 0xbeefdeadfed(%rbp)
-    rmmovq  %rax, 0xbeefdead(%rax)
-    rmmovq  %rcx, 0xbeefdead(%rax)
-    rmmovq  %rdx, 0xbeefdead(%rax)
-    rmmovq  %rbx, 0xbeefdead(%rax)
-    rmmovq  %rsi, 0xbeefdead77778889(%rax)
-    rmmovq  %rdi, 0xbeefdead(%rax)
-    rmmovq  %rsp, 0xbeefdead(%rax)
-    rmmovq  %rbp, 0xbeefdead(%rax)
-    mrmovq  0xbeefdead(%rax), %rax
-    mrmovq  0xbeefdead(%rcx), %rax
-    mrmovq  0xbeefdead(%rdx), %rax
-    mrmovq  0xbeefdead(%rbx), %rax
-    mrmovq  0xbeefdead(%rsi), %rax
-    mrmovq  0xbeefdead(%rdi), %rax
-    mrmovq  0xbeefdead(%rsp), %rax
-    mrmovq  0xbeefdead(%rbp), %rax
-    mrmovq  0xbeefdead(%rax), %rax
-    mrmovq  0xbeefdead(%rax), %rcx
-    mrmovq  0xbeefdead(%rax), %rdx
-    mrmovq  0xbeefdead(%rax), %rbx
-    mrmovq  0xbeefdead(%rax), %rsi
-    mrmovq  0xbeefdead(%rax), %rdi
-    mrmovq  0xbeefdead(%rax), %rsp
-    mrmovq  0xbeefdead(%rax), %rbp
-    halt
+    rmmovq  %rax, 0xbeefdeadfeed(%rax)        #4000BEEFDEADFEED
+    rmmovq  %rax, 0xbeefdead(%rcx)        #4001BEEFDEAD
+    rmmovq  %rax, 0xbeefdead(%rdx)        #4002BEEFDEAD
+    rmmovq  %rax, 0xbeefdeadfeed(%rbx)        #4003BEEFDEADFEED
+    rmmovq  %rax, 0xbeefdead(%rsi)        #4006BEEFDEAD
+    rmmovq  %rax, 0xbeefdead(%rdi)        #4007BEEFDEAD
+    rmmovq  %rax, 0xbeefdeadfeed(%rsp)        #4004BEEFDEADFEED
+    rmmovq  %rax, 0xbeefdeadfed(%rbp)        #4005BEEFDEADFED
+    rmmovq  %rax, 0xbeefdead(%rax)        #4000BEEFDEAD
+    rmmovq  %rcx, 0xbeefdead(%rax)        #4010BEEFDEAD
+    rmmovq  %rdx, 0xbeefdead(%rax)        #4020BEEFDEAD
+    rmmovq  %rbx, 0xbeefdead(%rax)        #4030BEEFDEAD
+    rmmovq  %rsi, 0xbeefdead77778889(%rax)        #4060BEEFDEAD77778889
+    rmmovq  %rdi, 0xbeefdead(%rax)        #4070BEEFDEAD
+    rmmovq  %rsp, 0xbeefdead(%rax)        #4040BEEFDEAD
+    rmmovq  %rbp, 0xbeefdead(%rax)        #4050BEEFDEAD
+    mrmovq  0xbeefdead(%rax), %rax        #5000BEEFDEAD
+    mrmovq  0xbeefdead(%rcx), %rax        #5001BEEFDEAD
+    mrmovq  0xbeefdead(%rdx), %rax        #5002BEEFDEAD
+    mrmovq  0xbeefdead(%rbx), %rax        #5003BEEFDEAD
+    mrmovq  0xbeefdead(%rsi), %rax        #5006BEEFDEAD
+    mrmovq  0xbeefdead(%rdi), %rax        #5007BEEFDEAD
+    mrmovq  0xbeefdead(%rsp), %rax        #5004BEEFDEAD
+    mrmovq  0xbeefdead(%rbp), %rax        #5005BEEFDEAD
+    mrmovq  0xbeefdead(%rax), %rax        #5000BEEFDEAD
+    mrmovq  0xbeefdead(%rax), %rcx        #5010BEEFDEAD
+    mrmovq  0xbeefdead(%rax), %rdx        #5020BEEFDEAD
+    mrmovq  0xbeefdead(%rax), %rbx        #5030BEEFDEAD
+    mrmovq  0xbeefdead(%rax), %rsi        #5060BEEFDEAD
+    mrmovq  0xbeefdead(%rax), %rdi        #5070BEEFDEAD
+    mrmovq  0xbeefdead(%rax), %rsp        #5040BEEFDEAD
+    mrmovq  0xbeefdead(%rax), %rbp        #5050BEEFDEAD
+    halt        #0
 
 .pos 0x800
-    addq    %rax, %rax
-    addq    %rax, %rcx
-    addq    %rax, %rdx
-    addq    %rax, %rbx
-    addq    %rax, %rsi
-    addq    %rax, %rdi
-    addq    %rax, %rsp
-    addq    %rax, %rbp
-    addq    %rcx, %rsi
-    addq    %rdx, %rsi
-    addq    %rbx, %rsi
-    addq    %rsi, %rsi
-    addq    %rdi, %rsi
-    addq    %rsp, %rsi
-    addq    %rbp, %rsi
-    addq    %rcx, %rax
-    addq    %rcx, %r8
-    addq    %rdx, %r9
-    addq    %rbx, %r10
-    addq    %rsi, %r11
-    addq    %rdi, %r12
-    addq    %rsp, %r13
-    addq    %rbp, %r14
-    addq    %r14, %rbp
-    addq    %r12, %r8
-    addq    %r12, %r9
-    addq    %r11, %r10
-    addq    %r10, %r11
-    addq    %r9, %r12
-    addq    %r8, %r13
-    addq    %rsp, %r14
-    subq    %rcx, %rsi
-    andq    %rdx, %rsi
-    xorq    %rbx, %rsi
-    jmp     0xdaddad
-    jle     0xdaddad
-    jl      0xdaddda
-    je      0xdaddad
-    jne     0xdaddad
-    jge     0xdaddad
-    jg      0xdaddad
-    cmovl   %rax, %rax
-    cmovl   %rax, %rcx
-    cmovl   %rax, %rdx
-    cmovl   %rax, %rbx
-    cmovl   %rax, %rsi
-    cmovl   %rax, %rdi
-    cmovl   %rax, %rsp
-    cmovl   %rax, %rbp
-    ret
-    cmovl   %rcx, %rsi
-    cmovl   %rdx, %rsi
-    cmovl   %rbx, %rsi
-    cmovl   %rsi, %rsi
-    cmovl   %rdi, %rsi
-    cmovl   %rsp, %rsi
-    cmovl   %rbp, %rsi
-    call    0x1234567890123456
-    cmovle  %rcx, %rsi
-    cmovl   %rdx, %rsi
-    cmovne  %rbx, %rsi
-    cmovge  %rsi, %rsi
-    cmovg   %rdi, %rsi
-    pushq   %rax
-    pushq   %rcx
-    pushq   %rdx
-    pushq   %rbx
-    pushq   %rsi
-    pushq   %rdi
-    pushq   %rsp
-    pushq   %rbp
-    popq    %rax
-    popq    %rcx
-    popq    %rdx
-    popq    %rbx
-    popq    %rsi
-    popq    %rdi
-    popq    %rsp
-    popq    %rbp
+    addq    %rax, %rax        #6000
+    addq    %rax, %rcx        #6001
+    addq    %rax, %rdx        #6002
+    addq    %rax, %rbx        #6003
+    addq    %rax, %rsi        #6006
+    addq    %rax, %rdi        #6007
+    addq    %rax, %rsp        #6004
+    addq    %rax, %rbp        #6005
+    addq    %rcx, %rsi        #6016
+    addq    %rdx, %rsi        #6026
+    addq    %rbx, %rsi        #6036
+    addq    %rsi, %rsi        #6066
+    addq    %rdi, %rsi        #6076
+    addq    %rsp, %rsi        #6046
+    addq    %rbp, %rsi        #6056
+    addq    %rcx, %rax        #6010
+    addq    %rcx, %r8        #6018
+    addq    %rdx, %r9        #6029
+    addq    %rbx, %r10        #603A
+    addq    %rsi, %r11        #606B
+    addq    %rdi, %r12        #607C
+    addq    %rsp, %r13        #604D
+    addq    %rbp, %r14        #605E
+    addq    %r14, %rbp        #60E5
+    addq    %r12, %r8        #60C8
+    addq    %r12, %r9        #60C9
+    addq    %r11, %r10        #60BA
+    addq    %r10, %r11        #60AB
+    addq    %r9, %r12        #609C
+    addq    %r8, %r13        #608D
+    addq    %rsp, %r14        #604E
+    subq    %rcx, %rsi        #6116
+    andq    %rdx, %rsi        #6226
+    xorq    %rbx, %rsi        #6336
+    jmp     0xdaddad        #70DADDAD
+    jle     0xdaddad        #71DADDAD
+    jl      0xdaddda        #72DADDDA
+    je      0xdaddad        #73DADDAD
+    jne     0xdaddad        #74DADDAD
+    jge     0xdaddad        #75DADDAD
+    jg      0xdaddad        #76DADDAD
+    cmovl   %rax, %rax        #2200
+    cmovl   %rax, %rcx        #2201
+    cmovl   %rax, %rdx        #2202
+    cmovl   %rax, %rbx        #2203
+    cmovl   %rax, %rsi        #2206
+    cmovl   %rax, %rdi        #2207
+    cmovl   %rax, %rsp        #2204
+    cmovl   %rax, %rbp        #2205
+    ret        #90
+    cmovl   %rcx, %rsi        #2216
+    cmovl   %rdx, %rsi        #2226
+    cmovl   %rbx, %rsi        #2236
+    cmovl   %rsi, %rsi        #2266
+    cmovl   %rdi, %rsi        #2276
+    cmovl   %rsp, %rsi        #2246
+    cmovl   %rbp, %rsi        #2256
+    call    0x1234567890123456        #801234567890123456
+    cmovle  %rcx, %rsi        #2116
+    cmovl   %rdx, %rsi        #2226
+    cmovne  %rbx, %rsi        #2436
+    cmovge  %rsi, %rsi        #2566
+    cmovg   %rdi, %rsi        #2676
+    pushq   %rax        #A00F
+    pushq   %rcx        #A01F
+    pushq   %rdx        #A02F
+    pushq   %rbx        #A03F
+    pushq   %rsi        #A06F
+    pushq   %rdi        #A07F
+    pushq   %rsp        #A04F
+    pushq   %rbp        #A05F
+    popq    %rax        #B00F
+    popq    %rcx        #B01F
+    popq    %rdx        #B02F
+    popq    %rbx        #B03F
+    popq    %rsi        #B06F
+    popq    %rdi        #B07F
+    popq    %rsp        #B04F
+    popq    %rbp        #B05F

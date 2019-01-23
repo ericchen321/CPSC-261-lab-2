@@ -1,4 +1,4 @@
     .quad 0xbeef
-    halt
+    halt        #0
 .pos 0x9
     .byte 0x0

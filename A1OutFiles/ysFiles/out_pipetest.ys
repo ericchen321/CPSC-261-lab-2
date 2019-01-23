@@ -1,139 +1,139 @@
 .pos 0x100
-    irmovq  $0x1, %rax
-    irmovq  $0x2, %rax
-    rrmovq  %rax, %rcx
-    irmovq  $0x1, %rdx
-    irmovq  $0x2, %rdx
-    irmovq  $0x3, %rdx
-    rrmovq  %rdx, %rbx
-    halt
+    irmovq  $0x1, %rax        #30F01
+    irmovq  $0x2, %rax        #30F02
+    rrmovq  %rax, %rcx        #2001
+    irmovq  $0x1, %rdx        #30F21
+    irmovq  $0x2, %rdx        #30F22
+    irmovq  $0x3, %rdx        #30F23
+    rrmovq  %rdx, %rbx        #2023
+    halt        #0
 
 .pos 0x200
-    irmovq  $0x0, %rax
-    irmovq  $0x0, %rcx
-    irmovq  $0x0, %rdx
-    irmovq  $0x0, %rbx
-    irmovq  $0x1, %rax
-    addq    %rax, %rbx
-    irmovq  $0x2, %rcx
-    nop
-    addq    %rcx, %rbx
-    irmovq  $0x3, %rdx
-    nop
-    nop
-    addq    %rdx, %rbx
-    halt
+    irmovq  $0x0, %rax        #30F00
+    irmovq  $0x0, %rcx        #30F10
+    irmovq  $0x0, %rdx        #30F20
+    irmovq  $0x0, %rbx        #30F30
+    irmovq  $0x1, %rax        #30F01
+    addq    %rax, %rbx        #6003
+    irmovq  $0x2, %rcx        #30F12
+    nop        #10
+    addq    %rcx, %rbx        #6013
+    irmovq  $0x3, %rdx        #30F23
+    nop        #10
+    nop        #10
+    addq    %rdx, %rbx        #6023
+    halt        #0
 
 .pos 0x300
-    irmovq  $0x0, %rax
-    irmovq  $0x0, %rcx
-    irmovq  $0x0, %rdx
-    irmovq  $0x10, %rbx
-    irmovq  $0x1, %rax
-    addq    %rbx, %rax
-    irmovq  $0x2, %rcx
-    nop
-    addq    %rbx, %rcx
-    irmovq  $0x3, %rdx
-    nop
-    nop
-    addq    %rbx, %rdx
-    halt
+    irmovq  $0x0, %rax        #30F00
+    irmovq  $0x0, %rcx        #30F10
+    irmovq  $0x0, %rdx        #30F20
+    irmovq  $0x10, %rbx        #30F310
+    irmovq  $0x1, %rax        #30F01
+    addq    %rbx, %rax        #6030
+    irmovq  $0x2, %rcx        #30F12
+    nop        #10
+    addq    %rbx, %rcx        #6031
+    irmovq  $0x3, %rdx        #30F23
+    nop        #10
+    nop        #10
+    addq    %rbx, %rdx        #6032
+    halt        #0
 
 .pos 0x400
-    irmovq  $0x0, %rax
-    irmovq  $0x0, %rcx
-    irmovq  $0x0, %rdx
-    irmovq  $0x0, %rbx
-    irmovq  $0x1000, %rdi
-    mrmovq  0x0(%rdi), %rax
-    addq    %rax, %rbx
-    mrmovq  0x0(%rdi), %rcx
-    nop
-    addq    %rcx, %rbx
-    mrmovq  0x0(%rdi), %rdx
-    nop
-    nop
-    addq    %rdx, %rbx
-    halt
+    irmovq  $0x0, %rax        #30F00
+    irmovq  $0x0, %rcx        #30F10
+    irmovq  $0x0, %rdx        #30F20
+    irmovq  $0x0, %rbx        #30F30
+    irmovq  $0x1000, %rdi        #30F71000
+    mrmovq  0x0(%rdi), %rax        #50070
+    addq    %rax, %rbx        #6003
+    mrmovq  0x0(%rdi), %rcx        #50170
+    nop        #10
+    addq    %rcx, %rbx        #6013
+    mrmovq  0x0(%rdi), %rdx        #50270
+    nop        #10
+    nop        #10
+    addq    %rdx, %rbx        #6023
+    halt        #0
 
 .pos 0x500
-    irmovq  $0x0, %rax
-    irmovq  $0x0, %rcx
-    irmovq  $0x0, %rdx
-    irmovq  $0x10, %rbx
-    irmovq  $0x1000, %rdi
-    mrmovq  0x0(%rdi), %rax
-    addq    %rbx, %rax
-    mrmovq  0x0(%rdi), %rcx
-    nop
-    addq    %rbx, %rcx
-    mrmovq  0x0(%rdi), %rdx
-    nop
-    nop
-    addq    %rbx, %rdx
-    halt
+    irmovq  $0x0, %rax        #30F00
+    irmovq  $0x0, %rcx        #30F10
+    irmovq  $0x0, %rdx        #30F20
+    irmovq  $0x10, %rbx        #30F310
+    irmovq  $0x1000, %rdi        #30F71000
+    mrmovq  0x0(%rdi), %rax        #50070
+    addq    %rbx, %rax        #6030
+    mrmovq  0x0(%rdi), %rcx        #50170
+    nop        #10
+    addq    %rbx, %rcx        #6031
+    mrmovq  0x0(%rdi), %rdx        #50270
+    nop        #10
+    nop        #10
+    addq    %rbx, %rdx        #6032
+    halt        #0
 
 .pos 0x600
-    irmovq  $0x0, %rax
-    irmovq  $0x0, %rcx
-    irmovq  $0x0, %rdx
-    irmovq  $0x0, %rbx
-    irmovq  $0x0, %rsp
-    andq    %rax, %rax
-    je      0x653
-    irmovq  $0x1, %rcx
-    irmovq  $0x1, %rdx
-    nop
-    halt
+    irmovq  $0x0, %rax        #30F00
+    irmovq  $0x0, %rcx        #30F10
+    irmovq  $0x0, %rdx        #30F20
+    irmovq  $0x0, %rbx        #30F30
+    irmovq  $0x0, %rsp        #30F40
+    andq    %rax, %rax        #6200
+    je      0x653        #73653
+    irmovq  $0x1, %rcx        #30F11
+    irmovq  $0x1, %rdx        #30F21
+    nop        #10
+    halt        #0
 
 .pos 0x653
-    irmovq  $0x1, %rbx
-    irmovq  $0x1, %rsp
-    halt
+    irmovq  $0x1, %rbx        #30F31
+    irmovq  $0x1, %rsp        #30F41
+    halt        #0
 
 .pos 0x700
-    irmovq  $0x0, %rax
-    irmovq  $0x0, %rcx
-    irmovq  $0x0, %rdx
-    irmovq  $0x0, %rbx
-    irmovq  $0x0, %rsp
-    andq    %rax, %rax
-    jne     0x752
-    irmovq  $0x1, %rcx
-    irmovq  $0x1, %rdx
-    halt
+    irmovq  $0x0, %rax        #30F00
+    irmovq  $0x0, %rcx        #30F10
+    irmovq  $0x0, %rdx        #30F20
+    irmovq  $0x0, %rbx        #30F30
+    irmovq  $0x0, %rsp        #30F40
+    andq    %rax, %rax        #6200
+    jne     0x752        #74752
+    irmovq  $0x1, %rcx        #30F11
+    irmovq  $0x1, %rdx        #30F21
+    halt        #0
 
 .pos 0x752
-    irmovq  $0x1, %rbx
-    irmovq  $0x1, %rsp
-    halt
+    irmovq  $0x1, %rbx        #30F31
+    irmovq  $0x1, %rsp        #30F41
+    halt        #0
 
 .pos 0x800
-    irmovq  $0xf028, %rsp
-    irmovq  $0x0, %rax
-    irmovq  $0x0, %rcx
-    irmovq  $0x0, %rdx
-    call    0x83c
-    irmovq  $0x1, %rcx
-    halt
+    irmovq  $0xf028, %rsp        #30F4F028
+    irmovq  $0x0, %rax        #30F00
+    irmovq  $0x0, %rcx        #30F10
+    irmovq  $0x0, %rdx        #30F20
+    call    0x83c        #8083C
+    irmovq  $0x1, %rcx        #30F11
+    halt        #0
 
 .pos 0x83c
-    irmovq  $0x1, %rax
-    ret
-    irmovq  $0x1, %rdx
-    halt
+    irmovq  $0x1, %rax        #30F01
+    ret        #90
+    irmovq  $0x1, %rdx        #30F21
+    halt        #0
 
 .pos 0x900
-    irmovq  $0x1, %rax
-    irmovq  $0x2, %rbx
-    xorq    %rcx, %rcx
-    cmovne  %rax, %rbx
-    addq    %rbx, %rbx
-    halt
+    irmovq  $0x1, %rax        #30F01
+    irmovq  $0x2, %rbx        #30F32
+    xorq    %rcx, %rcx        #6311
+    cmovne  %rax, %rbx        #2403
+    addq    %rbx, %rbx        #6033
+    halt        #0
 
 .pos 0x1000
     .quad 0xa
-    halt
+    halt        #0
 .pos 0xf02f
     .byte 0x0

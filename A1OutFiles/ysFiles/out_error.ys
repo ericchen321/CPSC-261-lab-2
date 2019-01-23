@@ -1,62 +1,62 @@
 .pos 0x10
-    nop
-    halt
+    nop        #10
+    halt        #0
 
 .pos 0x20
-    addq    %rax, %rax
-    halt
+    addq    %rax, %rax        #6000
+    halt        #0
 
 .pos 0x30
-    addq    %rax, %rcx
-    halt
+    addq    %rax, %rcx        #6001
+    halt        #0
 
 .pos 0x40
-    addq    %rax, %rdx
-    halt
+    addq    %rax, %rdx        #6002
+    halt        #0
 
 .pos 0x50
-    addq    %rax, %rbx
-    halt
+    addq    %rax, %rbx        #6003
+    halt        #0
 
 .pos 0x60
-    jle     0xdaddad
-    halt
+    jle     0xdaddad        #71DADDAD
+    halt        #0
 
 .pos 0x70
-    jl      0xdaddda
-    halt
+    jl      0xdaddda        #72DADDDA
+    halt        #0
 
 .pos 0x80
-    je      0xdaddad
-    halt
+    je      0xdaddad        #73DADDAD
+    halt        #0
 
 .pos 0x90
-    jne     0xdaddad
-    halt
+    jne     0xdaddad        #74DADDAD
+    halt        #0
 
 .pos 0x100
-    jge     0xdaddad
-    halt
+    jge     0xdaddad        #75DADDAD
+    halt        #0
 
 .pos 0x110
-    jg      0xdaddad
-    halt
+    jg      0xdaddad        #76DADDAD
+    halt        #0
 
 .pos 0x120
-    cmovl   %rax, %rax
-    halt
+    cmovl   %rax, %rax        #2200
+    halt        #0
 
 .pos 0x130
-    cmovl   %rax, %rcx
-    halt
+    cmovl   %rax, %rcx        #2201
+    halt        #0
 
 .pos 0x140
-    cmovl   %rax, %rdx
-    halt
+    cmovl   %rax, %rdx        #2202
+    halt        #0
 
 .pos 0x150
-    ret
-    halt
+    ret        #90
+    halt        #0
 
 .pos 0x160
-    call    0x1234567890123456
+    call    0x1234567890123456        #801234567890123456

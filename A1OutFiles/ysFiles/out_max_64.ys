@@ -1,46 +1,46 @@
 .pos 0x100
-    irmovq  $0x1000, %rbx
-    mrmovq  0x0(%rbx), %rbx
-    irmovq  $0x1008, %rcx
-    mrmovq  0x0(%rcx), %rcx
-    irmovq  $0x80000000, %rax
-    irmovq  $0x4, %rdi
-    irmovq  $0x1, %rdx
-    subq    %rdx, %rcx
-    jl      0x175
-    mrmovq  0x0(%rbx), %rdx
-    addq    %rdi, %rbx
-    rrmovq  %rdx, %rsi
-    subq    %rax, %rsi
-    jle     0x13c
-    rrmovq  %rdx, %rax
-    jmp     0x13c
-    irmovq  $0x1010, %rbx
-    rmmovq  %rax, 0x0(%rbx)
-    halt
+    irmovq  $0x1000, %rbx        #30F31000
+    mrmovq  0x0(%rbx), %rbx        #50330
+    irmovq  $0x1008, %rcx        #30F11008
+    mrmovq  0x0(%rcx), %rcx        #50110
+    irmovq  $0x80000000, %rax        #30F080000000
+    irmovq  $0x4, %rdi        #30F74
+    irmovq  $0x1, %rdx        #30F21
+    subq    %rdx, %rcx        #6121
+    jl      0x175        #72175
+    mrmovq  0x0(%rbx), %rdx        #50230
+    addq    %rdi, %rbx        #6073
+    rrmovq  %rdx, %rsi        #2026
+    subq    %rax, %rsi        #6106
+    jle     0x13c        #7113C
+    rrmovq  %rdx, %rax        #2020
+    jmp     0x13c        #7013C
+    irmovq  $0x1010, %rbx        #30F31010
+    rmmovq  %rax, 0x0(%rbx)        #40030
+    halt        #0
 
 .pos 0x1001
-    rrmovq  %rax, %rax
-    halt
+    rrmovq  %rax, %rax        #2000
+    halt        #0
 
 .pos 0x1008
     .quad 0xa
-    halt
+    halt        #0
 
 .pos 0x2000
     .quad 0xe
     .quad 0x3
     .quad 0x1d
     .quad 0xf
-    nop
-    halt
+    nop        #10
+    halt        #0
 
 .pos 0x2028
     .quad 0x2be
     .quad 0x141
     .quad 0x2b
     .quad 0xffffff9c
-    rrmovq  %rax, %rax
-    halt
+    rrmovq  %rax, %rax        #2000
+    halt        #0
 .pos 0x204f
     .byte 0x0
