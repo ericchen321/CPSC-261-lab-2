@@ -1,0 +1,2 @@
+.quad 0xBEEF
+.quad 0xABCD

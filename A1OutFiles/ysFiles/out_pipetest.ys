@@ -1,0 +1,139 @@
+.pos 0x100
+    irmovq  $0x1, %rax
+    irmovq  $0x2, %rax
+    rrmovq  %rax, %rcx
+    irmovq  $0x1, %rdx
+    irmovq  $0x2, %rdx
+    irmovq  $0x3, %rdx
+    rrmovq  %rdx, %rbx
+    halt
+
+.pos 0x200
+    irmovq  $0x0, %rax
+    irmovq  $0x0, %rcx
+    irmovq  $0x0, %rdx
+    irmovq  $0x0, %rbx
+    irmovq  $0x1, %rax
+    addq    %rax, %rbx
+    irmovq  $0x2, %rcx
+    nop
+    addq    %rcx, %rbx
+    irmovq  $0x3, %rdx
+    nop
+    nop
+    addq    %rdx, %rbx
+    halt
+
+.pos 0x300
+    irmovq  $0x0, %rax
+    irmovq  $0x0, %rcx
+    irmovq  $0x0, %rdx
+    irmovq  $0x10, %rbx
+    irmovq  $0x1, %rax
+    addq    %rbx, %rax
+    irmovq  $0x2, %rcx
+    nop
+    addq    %rbx, %rcx
+    irmovq  $0x3, %rdx
+    nop
+    nop
+    addq    %rbx, %rdx
+    halt
+
+.pos 0x400
+    irmovq  $0x0, %rax
+    irmovq  $0x0, %rcx
+    irmovq  $0x0, %rdx
+    irmovq  $0x0, %rbx
+    irmovq  $0x1000, %rdi
+    mrmovq  0x0(%rdi), %rax
+    addq    %rax, %rbx
+    mrmovq  0x0(%rdi), %rcx
+    nop
+    addq    %rcx, %rbx
+    mrmovq  0x0(%rdi), %rdx
+    nop
+    nop
+    addq    %rdx, %rbx
+    halt
+
+.pos 0x500
+    irmovq  $0x0, %rax
+    irmovq  $0x0, %rcx
+    irmovq  $0x0, %rdx
+    irmovq  $0x10, %rbx
+    irmovq  $0x1000, %rdi
+    mrmovq  0x0(%rdi), %rax
+    addq    %rbx, %rax
+    mrmovq  0x0(%rdi), %rcx
+    nop
+    addq    %rbx, %rcx
+    mrmovq  0x0(%rdi), %rdx
+    nop
+    nop
+    addq    %rbx, %rdx
+    halt
+
+.pos 0x600
+    irmovq  $0x0, %rax
+    irmovq  $0x0, %rcx
+    irmovq  $0x0, %rdx
+    irmovq  $0x0, %rbx
+    irmovq  $0x0, %rsp
+    andq    %rax, %rax
+    je      0x653
+    irmovq  $0x1, %rcx
+    irmovq  $0x1, %rdx
+    nop
+    halt
+
+.pos 0x653
+    irmovq  $0x1, %rbx
+    irmovq  $0x1, %rsp
+    halt
+
+.pos 0x700
+    irmovq  $0x0, %rax
+    irmovq  $0x0, %rcx
+    irmovq  $0x0, %rdx
+    irmovq  $0x0, %rbx
+    irmovq  $0x0, %rsp
+    andq    %rax, %rax
+    jne     0x752
+    irmovq  $0x1, %rcx
+    irmovq  $0x1, %rdx
+    halt
+
+.pos 0x752
+    irmovq  $0x1, %rbx
+    irmovq  $0x1, %rsp
+    halt
+
+.pos 0x800
+    irmovq  $0xf028, %rsp
+    irmovq  $0x0, %rax
+    irmovq  $0x0, %rcx
+    irmovq  $0x0, %rdx
+    call    0x83c
+    irmovq  $0x1, %rcx
+    halt
+
+.pos 0x83c
+    irmovq  $0x1, %rax
+    ret
+    irmovq  $0x1, %rdx
+    halt
+
+.pos 0x900
+    irmovq  $0x1, %rax
+    irmovq  $0x2, %rbx
+    xorq    %rcx, %rcx
+    cmovne  %rax, %rbx
+    addq    %rbx, %rbx
+    halt
+
+.pos 0x1000
+    .quad 0xa
+    halt
+.pos 0xf02f
+    .byte 0x0

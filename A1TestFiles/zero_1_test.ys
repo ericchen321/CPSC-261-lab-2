@@ -1,0 +1,3 @@
+halt
+.pos 0x3f
+.byte 0x0

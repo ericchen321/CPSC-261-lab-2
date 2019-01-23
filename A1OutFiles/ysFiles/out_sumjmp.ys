@@ -1,0 +1,51 @@
+    irmovq  $0x200, %rsp
+    call    0x14
+    halt
+
+.pos 0x14
+    irmovq  $0x80, %rdi
+    irmovq  $0x4, %rsi
+    call    0x32
+    ret
+    irmovq  $0x8, %r8
+    irmovq  $0x1, %r9
+    xorq    %rax, %rax
+    andq    %rsi, %rsi
+    jmp     0x72
+    mrmovq  0x0(%rdi), %r10
+    xorq    %r11, %r11
+    subq    %r10, %r11
+    jle     0x6c
+    rrmovq  %r11, %r10
+    addq    %r10, %rax
+    addq    %r8, %rdi
+    subq    %r9, %rsi
+    jne     0x53
+    ret
+    halt
+
+.pos 0x80
+    .quad 0xd000d000d
+    .quad 0xffffff3fff3fff40
+    halt
+
+.pos 0x91
+    .byte 0xb
+    halt
+
+.pos 0x93
+    .byte 0xb
+    halt
+
+.pos 0x95
+    .byte 0xb
+    halt
+
+.pos 0x99
+    .byte 0x60
+    .byte 0xff
+    .byte 0x5f
+    .byte 0xff
+    .byte 0x5f
+    .byte 0xff
+    .byte 0xff

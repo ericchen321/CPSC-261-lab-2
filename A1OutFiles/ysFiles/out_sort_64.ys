@@ -1,0 +1,50 @@
+.pos 0x100
+    irmovq  $0x1008, %rax
+    mrmovq  0x0(%rax), %rax
+    irmovq  $0x1000, %rcx
+    mrmovq  0x0(%rcx), %rcx
+    irmovq  $0x1, %rdi
+    subq    %rdi, %rax
+    jl      0x1c3
+    mrmovq  0x0(%rcx), %rbx
+    rrmovq  %rax, %rdx
+    rrmovq  %rcx, %rsi
+    irmovq  $0x8, %rdi
+    addq    %rdi, %rsi
+    irmovq  $0x1, %rdi
+    subq    %rdi, %rdx
+    jl      0x1ae
+    mrmovq  0x0(%rsi), %rdi
+    rrmovq  %rdi, %rbp
+    subq    %rbx, %rbp
+    jge     0x199
+    rmmovq  %rbx, 0x0(%rsi)
+    rmmovq  %rdi, 0x0(%rcx)
+    rrmovq  %rdi, %rbx
+    irmovq  $0x8, %rdi
+    addq    %rdi, %rsi
+    jmp     0x157
+    irmovq  $0x8, %rdi
+    addq    %rdi, %rcx
+    jmp     0x128
+    halt
+
+.pos 0x1001
+    rrmovq  %rax, %rax
+    halt
+
+.pos 0x1008
+    .quad 0xa
+    halt
+
+.pos 0x2000
+    .quad 0x7
+    .quad 0x3
+    .quad 0x4
+    .quad 0xa
+    .quad 0x5
+    .quad 0x8
+    .quad 0x9
+    .quad 0x1
+    .quad 0x6
+    .quad 0x2

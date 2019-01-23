@@ -1,0 +1,62 @@
+.pos 0x10
+    nop
+    halt
+
+.pos 0x20
+    addq    %rax, %rax
+    halt
+
+.pos 0x30
+    addq    %rax, %rcx
+    halt
+
+.pos 0x40
+    addq    %rax, %rdx
+    halt
+
+.pos 0x50
+    addq    %rax, %rbx
+    halt
+
+.pos 0x60
+    jle     0xdaddad
+    halt
+
+.pos 0x70
+    jl      0xdaddda
+    halt
+
+.pos 0x80
+    je      0xdaddad
+    halt
+
+.pos 0x90
+    jne     0xdaddad
+    halt
+
+.pos 0x100
+    jge     0xdaddad
+    halt
+
+.pos 0x110
+    jg      0xdaddad
+    halt
+
+.pos 0x120
+    cmovl   %rax, %rax
+    halt
+
+.pos 0x130
+    cmovl   %rax, %rcx
+    halt
+
+.pos 0x140
+    cmovl   %rax, %rdx
+    halt
+
+.pos 0x150
+    ret
+    halt
+
+.pos 0x160
+    call    0x1234567890123456

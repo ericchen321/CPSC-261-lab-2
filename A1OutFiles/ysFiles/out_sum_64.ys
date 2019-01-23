@@ -1,0 +1,23 @@
+.pos 0x100
+    irmovq  $0x140, %rdx
+    xorq    %rax, %rax
+    mrmovq  0x0(%rdx), %rbx
+    addq    %rbx, %rax
+    irmovq  $0x8, %rbx
+    addq    %rbx, %rdx
+    irmovq  $0x170, %rbx
+    subq    %rdx, %rbx
+    jne     0x10c
+    ret
+    halt
+
+.pos 0x140
+    .quad 0x123456789abc
+    .quad 0x1111111111111
+    .quad 0xff
+    .quad 0x2468a
+    .quad 0xba
+    .quad 0x10101010f0f0f0f0
+    halt
+.pos 0x177
+    .byte 0x0

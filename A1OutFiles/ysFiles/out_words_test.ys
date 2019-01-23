@@ -1,0 +1,4 @@
+    .quad 0xabc
+    .quad 0xff
+    .byte 0xab
+    .byte 0xcd

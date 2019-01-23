@@ -1,0 +1,5 @@
+.quad 0xABC
+.quad 0xBEEF
+rrmovq %rax, %rax
+halt
+.byte 0xDD

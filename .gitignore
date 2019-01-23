@@ -1,8 +1,10 @@
 disassembler
 *.o
 *~
-*.mem
-*.ys
-A1TestFiles/
-A1OutFiles/
-*.sh
+
+# for testing purpose, not ignore binary files
+#*.mem
+#*.ys
+#A1TestFiles/
+#A1OutFiles/
+#*.sh

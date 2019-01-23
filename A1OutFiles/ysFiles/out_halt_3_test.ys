@@ -1,0 +1,5 @@
+    .quad 0xabc
+    halt
+
+.pos 0x9
+    .byte 0xdd
